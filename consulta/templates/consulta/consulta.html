@@ -1,0 +1,45 @@
+{% extends "partials/base.html" %}
+
+
+{% block conteudo %}
+
+<div class="row">
+    <div class="col-lg">
+
+        <div class="container">
+            <h2>Pedido#{{pedido.id}}</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome Cliente</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Hora</th>
+                        <th scope="col">Prazo</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Endereco</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{pedido.pk}}</th>
+                        <td>{{pedido.nome_cliente}}</td>
+                        <td>{{pedido.data}}</td>
+                        <td>{{pedido.hora}}</td>
+                        <th scope="row">{{pedido.prazo}} Dias</th>
+                        <td>{{pedido.estado}}</td>
+                        <td>{{pedido.endereco_origem}}</td>
+                        
+                    </tr>
+            
+                    <!-- Adicione mais linhas conforme necessário -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock conteudo %}
+
+
+

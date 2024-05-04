@@ -1,0 +1,23 @@
+{% extends 'partials/base.html' %}
+
+{% block conteudo %}
+
+<div class="row">
+    <div class="col-lg">
+        <h1>Rastreie seu pedido</h1>
+
+        <form method="POST" action="{% url 'pedido:pesquisa' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="InputRastreio">CODIGO DE RASTREIO</label>
+                <input type="text" name='rastreio' class="form-control" id="InputRastreio"
+                    aria-describedby="usuarioHelp" placeholder="Digite o codigo de rastreio">
+            </div>
+            
+            <button type="submit" class="btn btn-dark btn-block btn-lg">Rastrear</button>
+        </form>
+        
+    </div>
+
+
+{% endblock conteudo %}

@@ -1,0 +1,61 @@
+{% extends "partials/base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block conteudo %}
+
+<div class="row">
+
+    <div class="col-lg">
+        <h1>Login</h1>
+
+        <form method="POST" action="{% url 'perfil:login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="InputUsuario1">Usuário</label>
+                <input type="text" name='username' class="form-control" id="InputUsuario1"
+                    aria-describedby="usuarioHelp" placeholder="Digite seu usuário">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Senha:</label>
+                <input name='password' type="password" class="form-control" id="exampleInputPassword1"
+                    placeholder="Digite sua senha">
+            </div>
+            <button type="submit" class="btn btn-dark btn-block btn-lg">Entrar</button>
+        </form>
+        
+    </div>
+
+
+    <div class="col-lg">
+        <h1>Cadastro</h1>
+
+        <form method="POST" action="{% url 'perfil:criar' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="InputUsuario1">Usuário</label>
+                <input type="text" name='username' class="form-control" id="InputUsuario1"
+                    aria-describedby="usuarioHelp" placeholder="Digite seu usuário">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email:</label>
+                <input name='email' type="email" class="form-control" id="exampleInputEmail1"
+                    placeholder="Digite sua senha">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Senha:</label>
+                <input name='password' type="password" class="form-control" id="exampleInputPassword1"
+                    placeholder="Digite sua senha">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword2">Confirmar Senha:</label>
+                <input name='password2' type="password" class="form-control" id="exampleInputPassword2"
+                    placeholder="Digite sua senha">
+            </div>
+            <button type="submit" class="btn btn-dark btn-block btn-lg">Cadastrar</button>
+        </form>
+        
+    </div>
+</div>
+
+{% endblock conteudo %}
