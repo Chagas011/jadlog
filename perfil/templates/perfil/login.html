@@ -1,23 +1,17 @@
 {% extends 'partials/base.html' %} 
 
-{% block titulo_cadastro %}
-<div class="col-lg">
-    <h1>Login</h1>
+{% load crispy_forms_tags %}
+{% block conteudo %}
 
-    <form method="POST" action="{% url 'perfil:login' %}">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="InputUsuario1">Usuário</label>
-            <input type="text" name='username' class="form-control" id="InputUsuario1"
-                aria-describedby="usuarioHelp" placeholder="Digite seu usuário">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Senha:</label>
-            <input name='password' type="password" class="form-control" id="exampleInputPassword1"
-                placeholder="Digite sua senha">
-        </div>
-        <button type="submit" class="btn btn-dark btn-block btn-lg">Entrar</button>
-    </form>
-    
-</div>
-{% endblock titulo_cadastro %}
+
+<form method="POST" action="{% url 'pedido:cadastroPedidos' %}">
+    {% csrf_token %}
+
+    {% for visivel in form.visible_fields %}
+            {{visivel | as_crispy_field}}
+    {% endfor %}
+
+            <input type="submit" class="btn btn-dark"
+                    value="Enviar">
+</form>
+{% endblock conteudo %}

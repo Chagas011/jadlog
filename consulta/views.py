@@ -6,6 +6,10 @@ from django.http import HttpResponse
 from . models import Pedidos
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
+from django.views.generic.edit import FormView
+from .forms import CadastroForm
+from django.contrib import messages
+
 # Create your views here.
 
 
@@ -21,10 +25,30 @@ class ListaConsulta(ListView):
     context_object_name = 'pedidos'
 
 
-class CadastroPedidos(View):
-    def get(self, *args, **kwargs):
-        return HttpResponse('cadastro consulta')
+class CadastroPedidos(FormView):
+    template_name = 'consulta/cadastro.html'
 
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        self.contexto = {
+            'form': CadastroForm(request.POST or None)  # Passa os dados do POST, se houver, para o formulário
+        }
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.contexto)
+
+    def post(self, request, *args, **kwargs):
+        form = self.contexto['form']
+
+        if form.is_valid():
+            post = form.save()
+            messages.success(self.request, 'Post enviado com sucesso')
+            return redirect('pedido:pesquisa')
+        else:
+            # Se o formulário não for válido, devemos atualizar o contexto com o formulário inválido
+            self.contexto['form'] = form
+            return render(request, self.template_name, self.contexto)
+    
 
 class Editar(View):
     def get(self, *args, **kwargs):
